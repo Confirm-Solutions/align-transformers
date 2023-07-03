@@ -76,9 +76,9 @@ prealign_dataloader, train_dataloader, eval_dataloader, test_dataloader = prepar
 ###################
 # model object loading
 ###################
-das_config = AlignableLlamaConfig.from_pretrained(
-    os.path.join(args.model_path, "das_config")
-)
+#das_config = AlignableLlamaConfig.from_pretrained(
+#    os.path.join(args.model_path, "das_config")
+#)
 alignment_config = {
     'layer': das_config.das_layer,
     "token_range" : [
@@ -108,7 +108,7 @@ if os.path.isfile(file_path):
     logger.info("Skipping! Found previously finished training run for this experiment.")
     quit()
 
-das_config.save_pretrained(os.path.join(args.output_dir, run_name, "das_config"))
+#das_config.save_pretrained(os.path.join(args.output_dir, run_name, "das_config"))
 logger.info(f"Loading Pretrained LLM with bf16 = {args.bf16}...")
 model = AutoAlignableModel.from_pretrained(
     args.model_path,

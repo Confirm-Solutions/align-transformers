@@ -80,10 +80,10 @@ class AlignableGPT2Model(GPT2Model):
         if self.alignment_config != None:
             self.n_embd = config.n_embd
             # create rotate and derotate layers for alignment
-            searchable_n_embd = (
+            self.searchable_n_embd = (
                 alignment_config["token_range"][1] - alignment_config["token_range"][0]
             ) * config.n_embd
-            rotate_layer = RotateLayer(searchable_n_embd)
+            rotate_layer = RotateLayer(self.searchable_n_embd)
             self.rotate_layer = torch.nn.utils.parametrizations.orthogonal(rotate_layer)
             self.inverse_rotate_layer = InverseRotateLayer(self.rotate_layer)
         
